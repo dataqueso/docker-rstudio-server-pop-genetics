@@ -33,7 +33,7 @@ This image is based on Dave Tang's work highlighted in his blog post [Running RS
 
 ## Quickstart
 
-This image can be run as a container on Linux (x86_64), Apple silicon or Windows 11 with the proper setup of Docker.
+This image can be run as a container on Linux (x86_64/amd64), Apple silicon or Windows 11 with the proper setup of Docker.
 
 To try this project on Linux ARM64 (e.g., on Apple Silicon+macOS) or Linux AMD64 (e.g., on Linux x86_64 machines), use the following command and pre-built image.
 
@@ -61,13 +61,15 @@ Run the following to build for Apple silicon.
 docker build --platform=linux/arm64 --rm=true -t <username>/rstudio-pop-genetics:arm64 .
 ```
 
-Run the following commands to build cross-platform (linux amd64, linux arm64 and darwin amd64), pushing to a container registry, an image that can be run on an amd64 Linux machine, Apple silicon or Intel-based Mac.
+Run the following commands to build cross-platform (linux amd64 and linux arm64), pushing to a container registry, an image that can be run on an amd64 Linux machine or Apple silicon.
 
 ```
 docker login
 docker buildx create --use
 docker buildx build --platform linux/amd64,linux/arm64 --rm=true -t <username>/rstudio-pop-genetics --push .
 ```
+
+Note, the base image does not have a build for darwin/amd64 or Intel-based Mac.
 
 ## Run Image as a Container
 
