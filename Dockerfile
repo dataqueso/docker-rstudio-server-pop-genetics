@@ -32,6 +32,8 @@ RUN apt-get clean all && \
         libpq-dev \
         libproj-dev \
         libgdal-dev \
+        libargtable2-dev \
+        libclustalo-dev \
         gcc \
     && apt-get clean all && \
     apt-get purge && \
@@ -58,24 +60,6 @@ RUN wget http://www.clustal.org/download/current/clustalw-2.1-linux-x86_64-libcp
     cd clustalw-2.1-linux-x86_64-libcppstatic &&\
     cp clustalw2 /usr/local/bin
 
-RUN wget http://prdownloads.sourceforge.net/argtable/argtable2-13.tar.gz &&\
-    tar xzf argtable2-13.tar.gz &&\
-    cd argtable2-13 &&\
-    ./configure &&\
-    make &&\
-    sudo make install &&\
-    cd .. &&\
-    rm argtable2-13.tar.gz
-
-RUN wget http://www.clustal.org/omega/clustal-omega-1.2.4.tar.gz &&\
-    tar xzf clustal-omega-1.2.4.tar.gz &&\
-    cd clustal-omega-1.2.4 &&\
-    ./configure &&\
-    make &&\
-    sudo make install &&\
-    cd .. &&\
-    rm clustal-omega-1.2.4.tar.gz
-
 RUN wget https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/kaks-calculator/KaKs_Calculator1.2.tar.gz &&\
     tar xzf KaKs_Calculator1.2.tar.gz &&\
     cd KaKs_Calculator1.2/src &&\
@@ -92,5 +76,6 @@ RUN Rscript -e "install.packages(c('doParallel', 'foreach', 'ape', 'Rdpack', 'be
 RUN Rscript -e "devtools::install_github('drostlab/metablastr', build_vignettes = TRUE, dependencies = TRUE);"
 RUN Rscript -e "devtools::install_github('drostlab/rdiamond');"
 RUN Rscript -e "devtools::install_github('drostlab/orthologr');"
+RUN Rscript -e "devtools::install_github('YuLab-SMU/ggmsa')"
 
 WORKDIR /home/rstudio

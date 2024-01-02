@@ -18,7 +18,10 @@ The image also contains the following R packages (among many standard ones):
 - devtools
 - workflowr
 - BiocManager
+- rdiamond
+- metablastr
 - orthologr
+- ggmsa
 
 It is easy to add packages from RStudio Server in the container, preserved for future use in the same container as long as it's not removed.
 
