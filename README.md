@@ -29,17 +29,21 @@ This image is based on Dave Tang's work highlighted in his blog post [Running RS
 
 ## Prerequisites
 
-- Docker for your platform
+- Docker for your platform (on Windows and Mac use [Docker Desktop](https://www.docker.com/products/docker-desktop/))
 
 ## Quickstart
 
-To try this project on Apple silicon+macOS, use the following pre-built image (support for more architectures coming soon).
+This image can be run as a container on Linux (x86_64), Apple silicon or Windows 11 with the proper setup of Docker.
 
-Run the following from a project folder to which you'd like access from the container.
+To try this project on Linux ARM64 (e.g., on Apple Silicon+macOS) or Linux AMD64 (e.g., on Linux x86_64 machines), use the following command and pre-built image.
+
+Important: run the following from a project folder to which you'd like access from the container.
 
 ```
 docker run --name rstudio_server -d -p 8888:8787 -v $PWD:/home/rstudio -e PASSWORD=password  -t rheartpython/rstudio-pop-genetics
 ```
+
+To run on Windows, the command in Command Prompt will be similar except for the `-v $PWD:/home/rstudio` part which will use Windows environment variable syntax instead (e.g., `-v %CD%:/home/rstudio`).
 
 Log in to RStudio (at [http://localhost:8888/](http://localhost:8888/)) with username "rstudio" and password "password" and start having fun.
 
