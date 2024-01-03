@@ -33,17 +33,27 @@ This image is based on Dave Tang's work highlighted in his blog post [Running RS
 
 ## Quickstart
 
-This image can be run as a container on Linux (x86_64/amd64), Apple silicon or Windows 11 with the proper setup of Docker.
+This image can be run as a container on Linux (x86_64/amd64), Apple silicon, Apple Intel or Windows 11 machines with the proper setup of Docker.
+
+Important: run the following commands from a project folder to which you'd like access from the container.
 
 To try this project on Linux ARM64 (e.g., on Apple Silicon+macOS) or Linux AMD64 (e.g., on Linux x86_64 machines), use the following command and pre-built image.
-
-Important: run the following from a project folder to which you'd like access from the container.
 
 ```
 docker run --name rstudio_server -d -p 8888:8787 -v $PWD:/home/rstudio -e PASSWORD=password  -t rheartpython/rstudio-pop-genetics
 ```
 
-To run on Windows, the command in Command Prompt will be similar except for the `-v $PWD:/home/rstudio` part which will use Windows environment variable syntax instead (e.g., `-v %CD%:/home/rstudio`).
+To try on Intel-based Macs use the following command.
+
+```
+docker run --platform=linux/amd64 --name rstudio_server -d -p 8888:8787 -v $PWD:/home/rstudio -e PASSWORD=password  -t rheartpython/rstudio-pop-genetics
+```
+
+To run on Windows, the command in Command Prompt will be similar except for the `-v $PWD:/home/rstudio` part which will use Windows environment variable syntax instead (e.g., `-v %CD%:/home/rstudio`), thus the Windows 11 command is as follows in Command Prompt.
+
+```
+docker run --name rstudio_server -d -p 8888:8787 -v %CD%:/home/rstudio -e PASSWORD=password  -t rheartpython/rstudio-pop-genetics
+```
 
 Log in to RStudio (at [http://localhost:8888/](http://localhost:8888/)) with username "rstudio" and password "password" and start having fun.
 
@@ -69,7 +79,7 @@ docker buildx create --use
 docker buildx build --platform linux/amd64,linux/arm64 --rm=true -t <username>/rstudio-pop-genetics --push .
 ```
 
-Note, the base image does not have a build for darwin/amd64 or Intel-based Mac.
+Note, the base image does not have a build for darwin/amd64, but can still work when using the flag `--platform=linux/amd64` on Intel-based Macs.
 
 ## Run Image as a Container
 
@@ -80,6 +90,8 @@ Run the following command in your local folder of choice (usually where your pro
 ```
 docker run --name rstudio_server -d -p 8888:8787 -v $PWD:/home/rstudio -e PASSWORD=password  -t <username>/rstudio-pop-genetics
 ```
+
+Refer to the Quickstart guide above for other methods of running the docker container.
 
 Log in to RStudio (at [http://localhost:8888/](http://localhost:8888/)) with username "rstudio" and password "password" and start having fun.
 
